@@ -1,0 +1,50 @@
+---
+name: 'Update statistics'
+on:
+  schedule:
+    - cron: "46 11 * * 4"
+  push:
+    branches:
+      - "master"
+
+jobs:
+  notebooks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: sudo apt-get install -y jupyter python3-numpy python3-pandas python3-matplotlib
+
+      - uses: actions/checkout@v3
+
+      - name: Run notebooks
+        run: |
+          mkdir data
+          curl -L https://data-analysis.fedoraproject.org/csv-reports/countme/totals.csv -o data/epel.csv
+          mkdir out
+          jupyter nbconvert --to notebook --execute *.ipynb
+
+      - name: Install SSH key
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          echo "${{ secrets.GH_DEPLOY_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          cat <<EOT >> ~/.ssh/config
+          Host github.com
+          HostName github.com
+          IdentityFile ~/.ssh/id_rsa
+          EOT
+          git config --global user.email "actions@github.com"
+          git config --global user.name "gh-actions"
+
+      - name: Put output images in web branch
+        run: |
+          git clone -b gh-pages git@github.com:brianclemens/rocky-stats.git ~/web
+          mkdir -p ~/web/static
+          cp -rf out/*.png ~/web/static/
+          cd ~/web
+          git add static
+          git commit -m "Update stats"
+          git push
