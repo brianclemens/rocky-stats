@@ -42,9 +42,9 @@ jobs:
       - name: Put output images in web branch
         run: |
           git clone -b gh-pages git@github.com:brianclemens/rocky-stats.git ~/web
-          mkdir -p ~/web/static
-          cp -rf out/*.png ~/web/static/
+          mkdir -p ~/web/auto
+          cp -rf out/*.png ~/web/auto/
           cd ~/web
-          git add static
+          git add auto
           git commit -m "Update stats"
           git push
