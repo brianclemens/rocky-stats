@@ -44,6 +44,7 @@ jobs:
           git clone -b gh-pages git@github.com:brianclemens/rocky-stats.git ~/web
           mkdir -p ~/web/auto
           cp -rf out/*.png ~/web/auto/
+          cp -rf out/*.svg ~/web/auto/
           cd ~/web
           git add auto
           git commit -m "Update stats"
