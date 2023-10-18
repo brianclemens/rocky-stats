@@ -20,7 +20,7 @@ jobs:
         run: |
           mkdir data
           curl -L https://data-analysis.fedoraproject.org/csv-reports/countme/totals.csv -o data/epel.csv
-		  curl -L 'https://docs.google.com/spreadsheets/d/16SfYqf2cZIe-t4ADNNXTeX3RBz5vi4kXSkwCrKFD0M8/export?gid=0&format=csv' -o data/dockerhub.csv
+          curl -L 'https://docs.google.com/spreadsheets/d/16SfYqf2cZIe-t4ADNNXTeX3RBz5vi4kXSkwCrKFD0M8/export?gid=0&format=csv' -o data/dockerhub.csv
           mkdir out
           jupyter nbconvert --to notebook --execute *.ipynb
 
