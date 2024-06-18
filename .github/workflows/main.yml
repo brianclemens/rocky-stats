@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
-        run: sudo apt-get install -y jupyter python3-numpy python3-pandas python3-matplotlib
+        run: sudo apt-get install -y jupyter python3-numpy python3-pandas python3-matplotlib python3-tqdm
 
       - uses: actions/checkout@v3
 
