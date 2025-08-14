@@ -10,10 +10,12 @@
         :root {
             --rocky-green: #48B585;
             --rocky-dark: #2a5940;
+            --accent-orange: #ff6b35;
             --text-color: #333;
             --bg-color: #ffffff;
             --border-color: #e0e0e0;
             --section-bg: #f8f9fa;
+            --live-indicator: #00ff88;
         }
         
         * {
@@ -36,16 +38,58 @@
         }
         
         header {
-            background: var(--rocky-green);
+            background: linear-gradient(135deg, var(--rocky-green) 0%, var(--rocky-dark) 100%);
             color: white;
             padding: 2rem 0;
             margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
         }
         
         header h1 {
             font-size: 2.5rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .live-badge {
+            background: var(--live-indicator);
+            color: #000;
+            padding: 0.2rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
         }
         
         header p {
@@ -67,6 +111,7 @@
             padding: 0.5rem 1rem;
             border-radius: 5px;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
         }
         
         .nav-links a:hover {
@@ -137,6 +182,8 @@
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2rem;
+                flex-direction: column;
+                align-items: flex-start;
             }
             
             .container {
@@ -152,11 +199,13 @@
 <body>
     <header>
         <div class="container">
-            <h1>🏔️ Rocky Linux Statistics</h1>
-            <p>Comprehensive analysis of Enterprise Linux distribution usage patterns</p>
-            <div class="nav-links">
-                <a class="umami--click--ciq-link" href="https://ciq.co/blog/tracking-rocky-linux-growth-using-fedoras-epel-project/">📄 Read the Analysis</a>
-                <a href="https://github.com/brian-team/rocky-stats-github">💻 Source Code</a>
+            <div class="header-content">
+                <h1>Rocky Linux Statistics <span class="live-badge">LIVE(ish)</span></h1>
+                <p>Comprehensive analysis of Enterprise Linux distribution usage patterns</p>
+                <div class="nav-links">
+                    <a class="umami--click--ciq-link" href="https://ciq.co/blog/tracking-rocky-linux-growth-using-fedoras-epel-project/">📄 Read the Analysis</a>
+                    <a href="https://github.com/brianclemens/rocky-stats/blob/master/epel.ipynb">💻 Source Code</a>
+                </div>
             </div>
         </div>
     </header>
