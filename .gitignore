@@ -1,5 +1,13 @@
+# Python
+__pycache__/
+*.pyc
+
+# Jupyter
 .ipynb_checkpoints
-.jupyter
-.virtual_documents
-data
-out
+
+# Data files (cached downloads)
+data/*.csv
+
+# Generated plots
+out/*.png
+out/*.svg
