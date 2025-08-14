@@ -1,31 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="UTF-8">
-<title>Rocky Linux Statistics</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<script defer data-domain="rocky-stats.tiuxo.com" src="https://pbl.tiuxo.com/js/script.tagged-events.outbound-links.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Rocky Linux Statistics - Enterprise Linux Distribution Analytics</title>
+    <meta name="description" content="Comprehensive analysis of Enterprise Linux distribution usage patterns using EPEL telemetry data. Track Rocky Linux growth vs RHEL, CentOS Stream, AlmaLinux, and Oracle Linux.">
+    <script defer data-domain="rocky-stats.tiuxo.com" src="https://pbl.tiuxo.com/js/script.tagged-events.outbound-links.js"></script>
+    <style>
+        :root {
+            --rocky-green: #48B585;
+            --rocky-dark: #2a5940;
+            --text-color: #333;
+            --bg-color: #ffffff;
+            --border-color: #e0e0e0;
+            --section-bg: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: var(--rocky-green);
+            color: white;
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section h2 {
+            color: var(--rocky-dark);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--rocky-green);
+        }
+        
+        .chart-grid {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .chart-item {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .chart-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        
+        .chart-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .chart-title {
+            padding: 1rem;
+            background: var(--section-bg);
+            font-weight: 500;
+            color: var(--rocky-dark);
+        }
+        
+        footer {
+            background: var(--section-bg);
+            padding: 2rem 0;
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+        
+        footer a {
+            color: var(--rocky-green);
+            text-decoration: none;
+        }
+        
+        footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
 <body>
+    <header>
+        <div class="container">
+            <h1>🏔️ Rocky Linux Statistics</h1>
+            <p>Comprehensive analysis of Enterprise Linux distribution usage patterns</p>
+            <div class="nav-links">
+                <a class="umami--click--ciq-link" href="https://ciq.co/blog/tracking-rocky-linux-growth-using-fedoras-epel-project/">📄 Read the Analysis</a>
+                <a href="https://github.com/brian-team/rocky-stats-github">💻 Source Code</a>
+            </div>
+        </div>
+    </header>
 
-<p>For an explanation on these charts, there's an article <a class="umami--click--ciq-link" href="https://ciq.co/blog/tracking-rocky-linux-growth-using-fedoras-epel-project/">here</a></p>
+    <div class="container">
+        <div class="section">
+            <h2>📊 Distribution Market Share</h2>
+            <div class="chart-grid">
+                <div class="chart-item">
+                    <div class="chart-title">Enterprise Linux Instances by Distribution (Total)</div>
+                    <img src="auto/el89_by_distro_total_area.svg" alt="Enterprise Linux instances by distribution showing total usage over time">
+                </div>
+                <div class="chart-item">
+                    <div class="chart-title">Enterprise Linux Instances by Distribution Share</div>
+                    <img src="auto/el89_by_distro_total_share_area.svg" alt="Enterprise Linux distribution market share over time">
+                </div>
+            </div>
+        </div>
 
-<p>These are last known good charts. Automatic updates are <a href="auto.html">here</a></p>
+        <div class="section">
+            <h2>📈 Long-term Trends</h2>
+            <div class="chart-grid">
+                <div class="chart-item">
+                    <div class="chart-title">Long-term Distribution Trends (System Age > 1 Week)</div>
+                    <img src="auto/el_by_distro_longterm_line.svg" alt="Long-term trends of Enterprise Linux distributions">
+                </div>
+                <div class="chart-item">
+                    <div class="chart-title">Ephemeral Instances by Distribution (Long-term)</div>
+                    <img src="auto/el_by_distro_ephemeral_longterm_line.svg" alt="Ephemeral Enterprise Linux instances over time">
+                </div>
+            </div>
+        </div>
 
-<img src="static/el89_by_distro_total_area.svg" alt="alt" style="width:100%">
-<img src="static/el89_by_distro_total_share_area.svg" alt="alt" style="width:100%">
-<img src="static/el_by_distro_longterm_line.svg" alt="alt" style="width:100%">
-<img src="static/el_by_distro_ephemeral_longterm_line.svg" alt="alt" style="width:100%">
-<img src="static/el_by_distro_line.svg" alt="alt" style="width:100%">
-<img src="static/el_by_distro_ephemeral_line.svg" alt="alt" style="width:100%">
-<img src="static/el_by_age_distro_bars.svg" alt="alt" style="width:100%">
-<img src="static/el8_by_distro_line.svg" alt="alt" style="width:100%">
-<img src="static/el9_by_distro_line.svg" alt="alt" style="width:100%">
-<img src="static/el10_by_distro_line.svg" alt="alt" style="width:100%">
-<img src="static/rocky_by_age_share_area.svg" alt="alt" style="width:100%">
-<img src="static/rocky_by_version_share_area.svg" alt="alt" style="width:100%">
-<img src="static/altarch_by_arch_area.svg" alt="alt" style="width:100%">
-<img src="static/dh_by_distro_line.svg" alt="alt" style="width:100%">
+        <div class="section">
+            <h2>🔥 Recent Activity</h2>
+            <div class="chart-grid">
+                <div class="chart-item">
+                    <div class="chart-title">Recent Distribution Trends (System Age > 1 Week)</div>
+                    <img src="auto/el_by_distro_line.svg" alt="Recent Enterprise Linux distribution trends">
+                </div>
+                <div class="chart-item">
+                    <div class="chart-title">Recent Ephemeral Instances by Distribution</div>
+                    <img src="auto/el_by_distro_ephemeral_line.svg" alt="Recent ephemeral Enterprise Linux instances">
+                </div>
+            </div>
+        </div>
 
-<p>These images are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>. Feel free to share!</p>
+        <div class="section">
+            <h2>🔢 Version Analysis</h2>
+            <div class="chart-grid">
+                <div class="chart-item">
+                    <div class="chart-title">Enterprise Linux 8 Instances by Distribution</div>
+                    <img src="auto/el8_by_distro_line.svg" alt="Enterprise Linux 8 distribution breakdown">
+                </div>
+                <div class="chart-item">
+                    <div class="chart-title">Enterprise Linux 9 Instances by Distribution</div>
+                    <img src="auto/el9_by_distro_line.svg" alt="Enterprise Linux 9 distribution breakdown">
+                </div>
+                <div class="chart-item">
+                    <div class="chart-title">Enterprise Linux 10 Instances by Distribution</div>
+                    <img src="auto/el10_by_distro_line.svg" alt="Enterprise Linux 10 distribution breakdown">
+                </div>
+            </div>
+        </div>
 
+        <div class="section">
+            <h2>🏔️ Rocky Linux Deep Dive</h2>
+            <div class="chart-grid">
+                <div class="chart-item">
+                    <div class="chart-title">Rocky Linux Instances by System Age</div>
+                    <img src="auto/rocky_by_age_share_area.svg" alt="Rocky Linux system age distribution">
+                </div>
+                <div class="chart-item">
+                    <div class="chart-title">Rocky Linux Instances by Version Share</div>
+                    <img src="auto/rocky_by_version_share_area.svg" alt="Rocky Linux version adoption over time">
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏗️ Infrastructure Analysis</h2>
+            <div class="chart-grid">
+                <div class="chart-item">
+                    <div class="chart-title">Enterprise Linux Instances by System Age and Distribution</div>
+                    <img src="auto/el_by_age_distro_bars.svg" alt="System age comparison across distributions">
+                </div>
+                <div class="chart-item">
+                    <div class="chart-title">Alternative Architecture Usage</div>
+                    <img src="auto/altarch_by_arch_area.svg" alt="Non-x86_64 architecture usage patterns">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>📈 These charts are automatically generated from EPEL telemetry data</p>
+            <p>📄 All images are licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a></p>
+            <p>💖 Feel free to share and use these visualizations!</p>
+        </div>
+    </footer>
 </body>
 </html> 
