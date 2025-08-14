@@ -83,6 +83,10 @@ def load_epel_data():
     for error_date in ERROR_DATES:
         df = df.drop(df[df['week_end'] == error_date].index)
     
+    # Filter out invalid sys_age = -1 entries (not real installations)
+    # https://pagure.io/fedora-infrastructure/issue/12545
+    df = df[df['sys_age'] != -1]
+    
     return df
 
 
