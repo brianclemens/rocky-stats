@@ -12,7 +12,7 @@ from datetime import datetime, timedelta
 from tqdm import tqdm
 from config import (
     DATA_DIR, CACHE_DAYS, EPEL_DATA_URL, DOCKERHUB_DATA_URL,
-    EPEL_REPOS, ERROR_DATES, DH_DISTROS, VALID_ROCKY_VERSIONS
+    EPEL_REPOS, ERROR_DATES, DH_DISTROS, VALID_EL_VERSIONS, VALID_ROCKY_VERSIONS
 )
 
 
@@ -77,7 +77,9 @@ def load_epel_data():
     )
     
     # Filter to EPEL repositories only
-    df = df[df['repo_tag'].isin(EPEL_REPOS)]
+    # This causes problems because of Z stream repos
+    # I need to learn more about those and fix the EPEL_REPOS array
+    # df = df[df['repo_tag'].isin(EPEL_REPOS)]
     
     # Remove data errors
     for error_date in ERROR_DATES:
@@ -181,6 +183,10 @@ def filter_by_os_name(df, os_name):
     """Filter dataframe by OS name."""
     return df[df['os_name'] == os_name]
 
+def filter_by_os_major_version(df, os_major_version):
+    """Filter dataframe by OS major version."""
+    major = df["os_version"].str.split(".").str[0]
+    return df[major == str(os_major_version)]
 
 def filter_by_arch(df, arch_filter='altarch'):
     """Filter dataframe by architecture."""
@@ -196,6 +202,9 @@ def add_total_column(df):
     df_copy['total'] = df_copy.sum(numeric_only=True, axis=1)
     return df_copy
 
+def filter_valid_versions(df):
+    """Filter dataframe to only include valid Enterprise Linux versions."""
+    return df[df['os_version'].isin(VALID_EL_VERSIONS)]
 
 def filter_valid_rocky_versions(df):
     """Filter dataframe to only include valid Rocky Linux versions."""

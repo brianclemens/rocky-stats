@@ -91,7 +91,16 @@ VALID_ROCKY_VERSIONS = [
     # Rocky Linux 8.x series
     '8.3', '8.4', '8.5', '8.6', '8.7', '8.8', '8.9', '8.10',
     # Rocky Linux 9.x series  
-    '9.0', '9.1', '9.2', '9.3', '9.4', '9.5', '9.6',
+    '9.0', '9.1', '9.2', '9.3', '9.4', '9.5', '9.6', '9.7',
     # Rocky Linux 10.x series
-    '10.0'
+    '10.0', '10.1'
+]
+
+# Valid Enterprise Linux versions for filtering
+# I know it seems silly to list them instead of regex, but I have to account
+# for situations like 7.10 not existing and such. 
+VALID_EL_VERSIONS = [
+    '8', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5', '8.6', '8.7', '8.8', '8.9', '8.10',
+    '9', '9.0', '9.1', '9.2', '9.3', '9.4', '9.5', '9.6', '9.7',
+    '10', '10.0', '10.1'
 ]
